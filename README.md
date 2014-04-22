@@ -5,7 +5,7 @@
 Diese Veranstaltung bietet eine praktische Einführung in statistische Verfahren und deren Anwendung auf sprachliche Beispiele. Sie vermittelt Grundlagenwissen sowohl aus dem Bereich der deskriptiven Statistik als auch über die gängigsten inferenzstatistischen Verfahren, die im Bereich der Sprache angewendet werden. Alle theoretischen Grundkenntnisse werden anhand von praktischen Übungen vertieft, die mit Hilfe des (frei verfügbaren) Statistikprogramms "R" durchgeführt werden. Nachdem die Teilnehmer Grundlagenkenntnisse in R erworben haben, werden darauf aufbauend Beispielfragestellungen aus unterschiedlichen sprachrelevanten Bereichen bearbeitet. Dabei wird neben der Frage nach einem angemessenen experimentellen Design und dem geeigneten statistischen Verfahren auch die praktische Umsetzung der Auswertung in R im Mittelpunkt stehen. Nach Besuch dieser Veranstaltung sollten Teilnehmer in der Lage sein, eigene Daten statistisch zu analysieren.
 
 # Organisatorisches
-- **Termin** montags 12-14 Uhr c.t. und dienstags 10-12 Uhr c.t.; Raum 03C01
+- **Termin** montags 12-14 Uhr c.t. Raum HSG +1/0120 und dienstags 10-12 Uhr c.t. WR6 01C08; 
 - **Anzahl der ECTS-Punkte und Art der Prüfung (Klausur, "Hausarbeit") nach der jeweilgen Prüfungsordnung.**
 - **Vorausgesetzt für die Zulassung zur Prüfung sind**
     - regelmäßige Teilnahme, inkl. Hausaufgaben zu jedem Termin -- siehe Blatt dazu
@@ -75,6 +75,7 @@ Die Reihe *Use R!* von Springer ist **kostenlos** über das Uni-Netz elektronisc
 * [R Bloggers](http://www.r-bloggers.com/)
 * [RSeek](http://rseek.org/)
 * [CrossValidated](http://stats.stackexchange.com/)
+* [How to Search for R Materials](http://stackoverflow.com/questions/102056/how-to-search-for-r-materials)
   
 # License
 This work is licensed under the Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Germany License. To view a copy of this license, visit http://creativecommons.org/licenses/by-nc-sa/3.0/de/.
