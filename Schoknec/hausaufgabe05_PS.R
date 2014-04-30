@@ -1,5 +1,5 @@
 # Hausaufgabe 04
-# Phillip Alday <phillip.alday@staff.uni-marburg.de>
+# Pia Schoknechet <schoknec@students.uni-marburg.de>
 # 2014-04-30
 # Dieses Werk ist lizenziert unter einer CC-BY-NC-SA Lizenz.
 
@@ -19,7 +19,7 @@
 library(ggplot2)
 
 # und danach die Daten:
-dat <- read.table("body_dim_long.tab",header=TRUE) 
+dat <- read.table("body_dim_long.tab",header=TRUE)
 
 # Wir haben im Kurs die Verteilung der Variabel weight angeschaut. In Skripten
 # werden Ergebnisse nicht automatich dargestellt, sondern nur dann, wenn ein
