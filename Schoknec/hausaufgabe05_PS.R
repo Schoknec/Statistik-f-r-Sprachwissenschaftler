@@ -19,7 +19,7 @@
 library(ggplot2)
 
 # und danach die Daten:
-dat <- read.table("body_dim_long.tab",header=TRUE)
+dat <- read.table("Schoknec/CopyOfbody_dim_long.tab", header =TRUE)
 
 # Wir haben im Kurs die Verteilung der Variabel weight angeschaut. In Skripten
 # werden Ergebnisse nicht automatich dargestellt, sondern nur dann, wenn ein
