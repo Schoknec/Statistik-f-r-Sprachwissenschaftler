@@ -74,6 +74,7 @@ print( weight.grafik.basis + geom_density(aes(color=sex,fill=sex),alpha=0.5) )
 # zwischen Männern und Frauen gibt, schließen wir erstmal die Männer aus:
 frauen <- subset(dat, sex=="f")
 
+
 # (Sie sollten sich wirklich überlegen, ob der Schritt "gut" ist. Haben wir 
 # dadurch unsre Ergebnisse verstellt? Sie müssen hier nichts schreiben, aber 
 # überlegen Sie sich wirklich, ob der Schritt sinnvoll war und was für Probeme 
@@ -86,17 +87,22 @@ frauen <- subset(dat, sex=="f")
 #sollten Sie die Plots so machen, damit man einen Vergleich zwischen den Gruppen
 #ziehen kann. Dafür gibt es verschiedene Möglichkeiten; die Wahl bleibt Ihnen
 #überlassen. 
-frauen.studiengang.bw <- ggplot(data=frauen,aes(x=height)) + geom_boxplot(aes(x="height",y=height))
+frauen.studiengang.bw <- ggplot(data=frauen,aes(x=major)) + geom_boxplot(aes(x=major,y=height))
 print(frauen.studiengang.bw)
 
-# Sehen die Studiengänge anders aus? Wir müssen hier noch relativ vorrsichtig
+# Sehen die Studiengänge anders aus? Wir müssen hier noch relativ vorsichtig
 # sein, weil die Gruppen *unbalanziert* sind, d.h. die Gruppen sind
 # unterschiedlich groß. Aber wie sieht der Vergleich auf den ersten Blick aus?
 # (Keine explizite Antwort nötig, nur eine Überlegung.)
 
 # Wir können natürlich auch die Dichte anschauen:
-#frauen.studiengang.dichte <- CODE_HIER
-#print(frauen.studiengang.dichte)
+frauen.studiengang.dichte <- ggplot(data=frauen,aes(x=major)) + geom_density(aes())
+print(frauen.studiengang.dichte)
+
+frauen.studiengang.dichte <- qplot(x=major, data=frauen,geom="density")
+print(frauen.studiengang.dichte)
+
+qplot(x=weight,data=dat,geom="density")
 
 # Haben Sie den gleichen Eindruck wie bei Box-Whisker bekommen? Unterscheiden
 # sich die Gruppen?
@@ -109,10 +115,10 @@ print(frauen.studiengang.bw)
 # In R gibt es oft verschiedene Möglichkeiten, etwas zu machen. Wir haben bisher
 # Teile einer Datenmenge mit subset() rausgezogen, aber wir können das auch mit 
 # einer weiteren Syntax machen:
-#klinisch <- frauen[frauen$major == "M.A..Klinische.Linguistik",]
-#print(klinisch)
+klinisch <- frauen[frauen$major == "M.A..Klinische.Linguistik",]
+print(klinisch)
 
-# Das sieht erstmal sehr vervwirrend aus, ist es aber nicht. Die eckigen
+# Das sieht erstmal sehr verwirrend aus, ist es aber nicht. Die eckigen
 # Klammern bestimmen die Auswahl an Elementen. Wir haben das ja bei Indizen in
 # Vektoren schon gesehen. Man kann eigentlich Indizen oder logische
 # Einschränkungen nutzen, und das gleiche gilt für Data Frames. Bei Data Frames
@@ -126,8 +132,8 @@ print(frauen.studiengang.bw)
 # Jetzt brauchen wir die Teilmenge für die anderen beiden Studiengänge, 
 # Linguistik Kognition und Kommunikation und Speech Science
 # HINT: wie sehen die Namen aus bzw. wie werden sie im data frame buchstabiert?
-#linkk <- frauen[CODE_HIER]
-#speech <- frauen[CODE_HIER] 
+#linkk <- frauen[frauen$major == "M.A..Linguistik.Kognition.und.Kommunikation]
+#speech <- frauen[frauen$major == "M.A..Speech.Science"] 
 
 # Berechnen Sie -- ohne Hilfe von sd() -- die Standardabweichung für die Größe der drei 
 # Gruppen. Sie können auch weitere Zeilen hinzufügen, wenn es Ihnen so leichter
