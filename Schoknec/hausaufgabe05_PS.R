@@ -102,8 +102,6 @@ print(frauen.studiengang.dichte)
 frauen.studiengang.dichte <- qplot(x=major, data=frauen,geom="density")
 print(frauen.studiengang.dichte)
 
-qplot(x=weight,data=dat,geom="density")
-
 # Haben Sie den gleichen Eindruck wie bei Box-Whisker bekommen? Unterscheiden
 # sich die Gruppen?
 # (Keine explizite Antwort nötig, nur eine Überlegung.)
@@ -132,18 +130,19 @@ print(klinisch)
 # Jetzt brauchen wir die Teilmenge für die anderen beiden Studiengänge, 
 # Linguistik Kognition und Kommunikation und Speech Science
 # HINT: wie sehen die Namen aus bzw. wie werden sie im data frame buchstabiert?
-#linkk <- frauen[frauen$major == "M.A..Linguistik.Kognition.und.Kommunikation]
-#speech <- frauen[frauen$major == "M.A..Speech.Science"] 
+linkk <- frauen[frauen$major == "M.A..Linguistik.Kognition.und.Kommunikation",]
+speech <- frauen[frauen$major == "M.A..Speech.Science",] 
 
 # Berechnen Sie -- ohne Hilfe von sd() -- die Standardabweichung für die Größe der drei 
 # Gruppen. Sie können auch weitere Zeilen hinzufügen, wenn es Ihnen so leichter
 # ist. 
 # HINT: Formel und Beispiel für die Berechnung auf den Folien!
-#klinisch.sd <- CODE_HIER
-#linkk.sd <- CODE_HIER
-#speech.sd <- CODE_HIER
+klinisch.sd <- sqrt(var(klinisch[,2]))
+linkk.sd <- sqrt(var(linkk[,2]))
+speech.sd <- sqrt(var(speech[,2]))
 
 # Berichten Sie jetzt die Mittelwerte und Standardabweichungen für die drei Gruppen. Die erste Gruppe steht hier als Muster:
-#print( paste("Studiengang: Klinische Linguistik","Mean:",mean(klinisch$height),"SD:",klinisch.sd) )
-#CODE_HIER
+print( paste("Studiengang: Klinische Linguistik","Mean:",mean(klinisch$height),"SD:",klinisch.sd) )
+print( paste("Studiengang: Linguistik","Mean:",mean(linkk$height),"SD:",linkk.sd) )
+print( paste("Studiengang: Speech Science","Mean:",mean(speech$height),"SD:",speech.sd) )
 
