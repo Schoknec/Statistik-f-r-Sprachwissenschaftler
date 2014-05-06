@@ -9,3 +9,4 @@ head(rt.zentriert, n=4)
 #z-Transformation
 rt.z <- (rtdata$RT - mean (rtdata$RT)) / sd (rtdata$RT)
 head(rt.z, n=4)
+
