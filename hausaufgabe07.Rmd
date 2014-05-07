@@ -56,7 +56,7 @@ Das funktioniert, weil alles rechts von `<-` zuerst gemacht wird. *Die Zuweisung
 ```{r}
 library(ggplot2)
 # we use geom_line() because dnorm() already gave us the densities! 
-# we onle use geom_density() when ggplot should calculate the density for us
+# we only use geom_density() when ggplot should calculate the density for us
 ggplot(data=noten.dist,aes(x=Notenpunkte,y=P,color=Standardabweichung)) + geom_line() + scale_x_continuous(limits=c(0,16))
 ```
 Ich habe die Grenzen der Grafik ein bisschen breiter gestellt, sodass man die Endpunkte klar sieht und Sie auch einen weiteren `ggplot`-Befehl kennen lernen. 
@@ -84,15 +84,20 @@ for(s in c(3,4,5) ){
 
 Aber wir hoffen alle, dass wir doch eine gute Note bekommen. Fügen Sie einen Code-Block hier ein, der das gleiche aber mit "ausgezeichneten" Noten (=1 bzw. >= 13) macht. (Bei evtl. Copy-Paste nicht vergessen, "fallen...durch" durch etwas Passendes zu ersetzen!)  
 
-code_block_hier
+for(s in c(3,4,5) ){
+  sehrgut <- pnorm(13,mean=mu,sd=s,lower.tail=FALSE)
+  output <- paste("Bei einer Standabweichung von",s, "sind"
+  ,sehrgut*100,"% sehr gut.")
+  print(output)
+}
 
 Wie steht die Anzahl guter Noten in Beziehung zur Anzahl schlechter Noten? 
 
-antwort_hier
+Es fallen mehr Studenten durch.
 
 Warum?
 
-antwort_hier
+Gute Noten sind 13,14,15. Durchgefallen ist man mit 5,4,3,2,1,0. Es gibt also mehr "Chancen" auf schlechte Noten. 
 
 ## Kurtosis und Schiefe
 Kurtosis (im Deutschen auch *Wölbung*) ist ein Maß dafür, wie spitz eine Verteilung ist. Die Normalverteilung wird nie zu extrem spitz -- der Gipfel bleibt immer schön rund, obwohl er manchmal eng wird. Andere Verteilungen (z.B. die Laplace-Verteilung ) haben Gipfel, die nicht rund sind.   
@@ -101,7 +106,7 @@ Schiefe (*skewness*) beschriebt die (A)Symmetrie einer Verteilung. Eine Verteilu
 
 Die Verteilung von Noten ist oft schief mit mehr guten Noten. Ist die Verteilung rechts- oder linksschief?
 
-antwort_hier
+linksschief
 
 Vielleicht hilft folgende Grafik mit der Visualisierung:
 
