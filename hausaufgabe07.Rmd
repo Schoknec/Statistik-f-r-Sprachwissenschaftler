@@ -120,24 +120,28 @@ Wir können die Perzentile in (absolute) Häufigkeiten übersetzen. Nehmen wir a
 ```{r}
 n <- 50
 noten.dist$Anzahl <- noten.dist$P * n
+noten.dist$Anzahl
 noten.dist
 ```
 
 Jetzt können wir die absoluten Häufigkeiten auch plotten:
 
-code_block_hier
+ggplot(data=noten.dist,aes(x=Notenpunkte,y=Anzahl,color=Standardabweichung)) + geom_line() + scale_x_continuous(limits=c(0,16))
 
 Beantworten Sie ein paar Fragen über die Verteilung, indem Sie den passenden R-Code einsetzen:
 
 1. Wie viele Studenten bekommen zwischen 7 und 9 NP bei einer Standardabweichung von 3?
 
-    `r (pnorm(9,mean=mu,sd=3) - pnorm(7,mean=mu,sd=3) ) * n` Studenten bekommen zwischen 7 und 9 Notenpunkten. 
+    `r,(pnorm(9,mean=mu,sd=3) - pnorm(7,mean=mu,sd=3) ) * n,`
+    Studenten bekommen zwischen 7 und 9 Notenpunkten. 
     
     Wichtig: bei Wahrscheinlichkeits- und Häufigkeitsverteilung ist der linke Rand inklusiv aber der rechte Rand exklusiv! Das heißt, wir zählen hiermit die Leute, die bis zu 9 NP bekommen haben aber nicht die, die tatsächlich 9 NP bekommen haben!
 
 2. Wie viele Studenten bekommen zumindest 10 NP?
 
-    `code_hier` Studenten bekommen zumindest 10 Notenpunkte.
+    `
+    qnorm(10, mean=mu, sd=3)
+    ` Studenten bekommen zumindest 10 Notenpunkte.
 
 3. Wie viele Studenten bekommen weniger als 10 NP?
 
