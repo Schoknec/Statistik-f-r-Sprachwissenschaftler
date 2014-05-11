@@ -132,29 +132,30 @@ Beantworten Sie ein paar Fragen über die Verteilung, indem Sie den passenden R-
 
 1. Wie viele Studenten bekommen zwischen 7 und 9 NP bei einer Standardabweichung von 3?
 
-    (pnorm(9,mean=mu,sd=3) - pnorm(7,mean=mu,sd=3) ) * n 
-    Studenten bekommen zwischen 7 und 9 Notenpunkten.
+mittel <- (pnorm(9,mean=mu,sd=3) - pnorm(7,mean=mu,sd=3) ) * n
+output <-paste(mittel,"Studenten bekommen zwischen 7 und 9 Notenpunkten.")
+print(output)
     
     Wichtig: bei Wahrscheinlichkeits- und Häufigkeitsverteilung ist der linke Rand inklusiv aber der rechte Rand exklusiv! Das heißt, wir zählen hiermit die Leute, die bis zu 9 NP bekommen haben aber nicht die, die tatsächlich 9 NP bekommen haben!
 
 2. Wie viele Studenten bekommen zumindest 10 NP?
 
-    `
-    (pnorm(15,mean=mu,sd=3) - pnorm(10,mean=mu,sd=3) ) * n 
-    ` Studenten bekommen zumindest 10 Notenpunkte.
+gut <- (pnorm(15,mean=mu,sd=3) - pnorm(10,mean=mu,sd=3) ) * n 
+output <-paste(gut,"Studenten bekommen zumindest 10 Notenpunkte.")
+print(output)
 
 
 3. Wie viele Studenten bekommen weniger als 10 NP?
 
-    ` 
-    pnorm(10,mean=mu,sd=3) * n
-    ` Studenten bekommen weniger als 10 Notenpunkte.
+weniger <- pnorm(10,mean=mu,sd=3) * n
+output <-paste(weniger,"Studenten bekommen weniger als 10 Notenpunkte.")
+print(output)
 
 4. Wie viele Studenten bekommen weniger als 8 NP?
 
-    `
-    pnorm(8,mean=mu,sd=3) * n
-    ` Studenten bekommen weniger als 8 Notenpunkte.
+oh <- pnorm(8,mean=mu,sd=3) * n
+output <-paste(oh,"Studenten bekommen weniger als 8 Notenpunkte.")
+print(output)
 
 
 (Die Einrückung mit 4 Leerschlägen ist die Syntax für mehrere Absätze pro Punkt auf der Liste.)
@@ -162,39 +163,52 @@ Beantworten Sie ein paar Fragen über die Verteilung, indem Sie den passenden R-
 ## Von Noten zu Perzentilen -- ich möchte mich den anderen überlegen fühlen!
 Manchmal will man in die andere Richtung gehen -- z.B. um die Frage beantworten zu können, welche Note man erreichen muss, um überdurchschnittlich zu sein. Dafür haben wir `qnorm()`. Überdurchschnittlich heißt "besser als die Hälfte abscheiden" (duh!) und wir nehmen wieder an, dass die Standardabweichung gleich 3 ist. Dann haben wir die Aussage:
 
-Um überdurchschnittlich zu sein, muss man mehr als `r 
-qnorm(0.5,mean=mu,sd=3)
-` Notenpunkte bekommen. 
+paste("Um überdurchschnittlich zu sein, muss man mehr als",qnorm(0.5,mean=mu,sd=3),"Notenpunkte bekommen.")
 
 Nicht so überraschend, dass "überdurchschnittlich" auch "mehr Punkte als den Durchschnitt bekommen" heißt! Wie sieht es aus, wenn wir besser als 99% der anderen abschließen möchten?
 
-Um in dem besten 1% abzuschließen, muss man zumindest `
-qnorm(0.99,mean=mu,sd=3)
-` Notenpunkte bekommen.
+paste("Um in dem besten 1% abzuschließen, muss man zumindest",qnorm(0.99,mean=mu,sd=3),"Notenpunkte bekommen.")
 
 ## z-Transformation
 Bei der Überprüfung der Lehrqualität scheint es der Verwaltung, dass ein gewisser Dozent andere Noten als andere Dozenten vergibt. Es wird entschieden, dass der Notenspiegel bei den Teilnehmern in einem von seinen Kursen getestet wird, um zu schauen, ob er sich von signifikant von der idealisierten Notenverteilung ($\mu=8,\sigma=3$) unterscheidet. Um zu zeigen, dass Gott $\alpha=0.06$ so viel liebt wie $\alpha=0.05$ `r citep("10.1037/0003-066X.44.10.1276")`, setzt die Verwaltung das Signikanzniveau auf 0.06. 
 
-Der kritische Wert für einen einseitigen $z$-Test ist `
-qnorm(0.94)
-`.
+paste("Der kritische Wert für einen einseitigen $z$-Test ist",qnorm(0.94),".")
 
-Die kritischen Werte für einen zweiseitigen $z$-Test sind $\pm$`
-qnorm(0.97)
-`.
+
+paste("Die kritischen Werte für einen zweiseitigen $z$-Test sind",qnorm(0.97),".")
 
 ### Gibt es einen Unterschied?
 Bei diesem Dozenten ist die Verwaltung wirklich unsicher, ob und was für einen Unterschied es geben könnte. (Welche Testart sollte man hier nutzen?)
 
 In einem kleinen Seminar mit 7 Studenten beträgt der Durchschnittswert 10. Unterscheidet sich der Notenspiegel von dem idealen? Berechnen Sie den $z$-Test:
 
-code_hier
+#Notenspiegel für das kleine Seminar mit mu=10
+drei <- dnorm(noten,mean=10,sd=3)
+noten.dist.m10 <- data.frame(Notenpunkte=noten,drei)
+noten.dist.m10
+noten.dist.m10 <- melt(noten.dist.m10,id.vars="Notenpunkte",value.name="P",variable.name="Standardabweichung")
+noten.dist.m10
+kl <- 7
+noten.dist.m10$Anzahl <- noten.dist.m10$P * kl
+noten.dist.m10$Anzahl
+noten.dist.m10
+
+znoten <- (noten.dist.m10$Anzahl - mean (noten.dist.m10$Anzahl)) / sd(noten.dist.m10$Anzahl)
+znoten
+head(znoten, n=4)
 
 Das ist ein **_eins_von_signifikanter_insignifikanter_** Unterschied. 
 
 In einer Vorlesung vom selben Dozenten mit 50 Teilnehmern beträgt der Durchschnittswert wieder 10. (Es scheint, dass der Dozent 10 besonders toll findet.) Berechnen Sie den $z$-Test:
 
-code_hier
+gr <- 50
+noten.dist.m10$Anzahl <- noten.dist.m10$P * gr
+noten.dist.m10$Anzahl
+noten.dist.m10
+
+znoten <- (noten.dist.m10$Anzahl - mean (noten.dist.m10$Anzahl)) / sd(noten.dist.m10$Anzahl)
+znoten
+head(znoten, n=4)
 
 Das ist ein **_eins_von_signifikanter_insignifikanter_** Unterschied. 
 
@@ -207,7 +221,18 @@ In einem mittelgroßen Seminar mit 20 Studenten beträgt der Durchschnittswert 7
 
 Berechnen Sie den $z$-Test:
 
-code_hier
+drei <- dnorm(noten,mean=7,sd=3)
+noten.dist.m7<- data.frame(Notenpunkte=noten,drei)
+noten.dist.m7
+noten.dist.m7 <- melt(noten.dist.m7,id.vars="Notenpunkte",value.name="P",variable.name="Standardabweichung")
+noten.dist.m7
+noten.dist.m7$Anzahl <- noten.dist.m7$P * 20
+noten.dist.m7$Anzahl
+noten.dist.m7
+
+znoten <- (noten.dist.m7$Anzahl - mean (noten.dist.m7$Anzahl)) / sd(noten.dist.m7$Anzahl)
+znoten
+head(znoten, n=4)
 
 Das ist ein **_eins_von_signifikanter_insignifikanter_** Unterschied. 
 
@@ -215,7 +240,18 @@ Später ergibt sich, dass es eigentlich 25 Studenten im Kurs gab. (Der Dozent ha
 
 Berechnen Sie den $z$-Test:
 
-code_hier
+drei <- dnorm(noten,mean=7,sd=3)
+noten.dist.m7 <- data.frame(Notenpunkte=noten,drei)
+noten.dist.m7
+noten.dist.m7 <- melt(noten.dist.m7,id.vars="Notenpunkte",value.name="P",variable.name="Standardabweichung")
+noten.dist.m7
+noten.dist.m7$Anzahl <- noten.dist.m7$P * 25
+noten.dist.m7$Anzahl
+noten.dist.m7
+
+znoten <- (noten.dist.m7$Anzahl - mean (noten.dist.m7$Anzahl)) / sd(noten.dist.m7$Anzahl)
+znoten
+head(znoten, n=4)
 
 Das ist ein **_eins_von_signifikanter_insignifikanter_** Unterschied. 
 
