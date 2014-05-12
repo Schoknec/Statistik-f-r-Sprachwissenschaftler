@@ -183,35 +183,18 @@ Bei diesem Dozenten ist die Verwaltung wirklich unsicher, ob und was für einen 
 In einem kleinen Seminar mit 7 Studenten beträgt der Durchschnittswert 10. Unterscheidet sich der Notenspiegel von dem idealen? Berechnen Sie den $z$-Test:
 
 #z-Test Formel auf Folie 21 von Sitzung 8
-#Notenspiegel für das kleine Seminar mit mu=10
-drei <- dnorm(noten,mean=10,sd=3)
-noten.dist.m10 <- data.frame(Notenpunkte=noten,drei)
-noten.dist.m10
-noten.dist.m10 <- melt(noten.dist.m10,id.vars="Notenpunkte",value.name="P",variable.name="Standardabweichung")
-noten.dist.m10
-kl <- 7
-noten.dist.m10$Anzahl <- noten.dist.m10$P * kl
-noten.dist.m10$Anzahl
-noten.dist.m10
+znoten <- sqrt(7) * ((10-8)/3)
+print(znoten)
 
-znoten <- (noten.dist.m10$Anzahl - mean (noten.dist.m10$Anzahl)) / sd(noten.dist.m10$Anzahl)
-znoten
-head(znoten, n=4)
 
-Das ist ein **_eins_von_signifikanter_insignifikanter_** Unterschied. 
+Das ist ein **_insignifikanter_** Unterschied. 
 
 In einer Vorlesung vom selben Dozenten mit 50 Teilnehmern beträgt der Durchschnittswert wieder 10. (Es scheint, dass der Dozent 10 besonders toll findet.) Berechnen Sie den $z$-Test:
 
-gr <- 50
-noten.dist.m10$Anzahl <- noten.dist.m10$P * gr
-noten.dist.m10$Anzahl
-noten.dist.m10
+znoten <- sqrt(50) * ((10-8)/3)
+print(znoten)
 
-znoten <- (noten.dist.m10$Anzahl - mean (noten.dist.m10$Anzahl)) / sd(noten.dist.m10$Anzahl)
-znoten
-head(znoten, n=4)
-
-Das ist ein **_eins_von_signifikanter_insignifikanter_** Unterschied. 
+Das ist ein **_signifikanter_** Unterschied. 
 
 Ist die Benotung vom Dozenten weniger als ideal? 
 
@@ -222,39 +205,19 @@ In einem mittelgroßen Seminar mit 20 Studenten beträgt der Durchschnittswert 7
 
 Berechnen Sie den $z$-Test:
 
-drei <- dnorm(noten,mean=7,sd=3)
-noten.dist.m7<- data.frame(Notenpunkte=noten,drei)
-noten.dist.m7
-noten.dist.m7 <- melt(noten.dist.m7,id.vars="Notenpunkte",value.name="P",variable.name="Standardabweichung")
-noten.dist.m7
-noten.dist.m7$Anzahl <- noten.dist.m7$P * 20
-noten.dist.m7$Anzahl
-noten.dist.m7
+znoten <- sqrt(20) * ((7-8)/3)
+print(znoten)
 
-znoten <- (noten.dist.m7$Anzahl - mean (noten.dist.m7$Anzahl)) / sd(noten.dist.m7$Anzahl)
-znoten
-head(znoten, n=4)
-
-Das ist ein **_eins_von_signifikanter_insignifikanter_** Unterschied. 
+Das ist ein **_insignifikanter_** Unterschied. 
 
 Später ergibt sich, dass es eigentlich 25 Studenten im Kurs gab. (Der Dozent hat "einen Tippfehler" gemacht, als er seine Teilnehmerzahl per Mail an die Verwaltung geschickt hat.) Der Durchschnittswert bleibt -- behauptet der Dozent -- immer noch bei 7. Er behauptet weiterhin, dass das wunderbar nah am Erwartungswert (8) ist, und dass man ihn in Ruhe lassen sollte. Ist er zu streng?
 
 Berechnen Sie den $z$-Test:
 
-drei <- dnorm(noten,mean=7,sd=3)
-noten.dist.m7 <- data.frame(Notenpunkte=noten,drei)
-noten.dist.m7
-noten.dist.m7 <- melt(noten.dist.m7,id.vars="Notenpunkte",value.name="P",variable.name="Standardabweichung")
-noten.dist.m7
-noten.dist.m7$Anzahl <- noten.dist.m7$P * 25
-noten.dist.m7$Anzahl
-noten.dist.m7
+znoten <- sqrt(25) * ((7-8)/3)
+print(znoten)
 
-znoten <- (noten.dist.m7$Anzahl - mean (noten.dist.m7$Anzahl)) / sd(noten.dist.m7$Anzahl)
-znoten
-head(znoten, n=4)
-
-Das ist ein **_eins_von_signifikanter_insignifikanter_** Unterschied. 
+Das ist ein **_signifikanter_** Unterschied. 
 
 ## Zum Überlegen
 Gibt es einen Grund, weshalb die Noten normal verteilt sein sollten? Warum ist das die übliche Annahme?
