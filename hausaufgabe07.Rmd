@@ -182,6 +182,7 @@ Bei diesem Dozenten ist die Verwaltung wirklich unsicher, ob und was für einen 
 
 In einem kleinen Seminar mit 7 Studenten beträgt der Durchschnittswert 10. Unterscheidet sich der Notenspiegel von dem idealen? Berechnen Sie den $z$-Test:
 
+#z-Test Formel auf Folie 21 von Sitzung 8
 #Notenspiegel für das kleine Seminar mit mu=10
 drei <- dnorm(noten,mean=10,sd=3)
 noten.dist.m10 <- data.frame(Notenpunkte=noten,drei)
