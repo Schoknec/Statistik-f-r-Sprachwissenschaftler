@@ -70,6 +70,10 @@ rt
 # Sie von vorneherein etwas behaupten haben.
 
 # Berechnen Sie jetzt den F-Test:
+#Vorher noch ein paar Spielereien
+#mean(rt$RT[1:10])
+#mean(rt$RT[11:20])
+#t.test(rt$RT~ rt$subj, var.equal=TRUE)
 print(var.test(rt$RT~ rt$subj))
 
 # Sind die Varianzen homogen? Vergessen Sie nicht, dass die Nullhypothese beim
