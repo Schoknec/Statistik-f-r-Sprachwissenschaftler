@@ -78,11 +78,13 @@ print(var.test(rt$RT~ rt$subj))
 
 # Sind die Varianzen homogen? Vergessen Sie nicht, dass die Nullhypothese beim
 # F-Test "Varianzen Ungleich" ist.
-#Varianzen sind heterogen (F=4,2)
+#Varianzen sind homogen (p=0,04)
 
 # Berechenen Sie den Levene Test:
-print(leveneTest(rt$RT~ rt$subj))
-#P ist größer als 0.05 --> Null-/Wunschhypothese muss verworfen werden --> Varianzen sind heterogen
+print(lev.test <- leveneTest(rt$RT~ rt$subj))
+lev.test$`Pr(>F)` < 0.05
+lev.test$`Pr(>F)`[1]< 0.05
+#P ist größer als 0.05 --> Null-/Wunschhypothese bestätigt --> Varianzen sind homogen
 
 # Sind die Varianzen homogen? Vergessen Sie nicht, dass die Nullhypothese beim
 # Levene Test "Varianzen Gleich" ist.
@@ -133,7 +135,7 @@ if (shapiro2$p.value > 0.05){
 # Wir haben auch Transformationen bei schiefen Datenverteilungen angesprochen.
 # Die logaritmische Verteilung ist ziemlich beliebt bei Reaktionszeitsdaten.
 
-rt$logRT <- log(rt$RT)
+rt$logRT<- log(rt$RT)
 print(summary(rt$logRT))
 logrt.plot <- qplot(x=logRT,color=subj,fill=subj,data=rt, geom="density",alpha=I(0.3))
 print(logrt.plot)
@@ -143,7 +145,20 @@ print(logrt.plot)
 # Daten. Nach jedem Test sollten Sie auch programmatisch (=durch if-Blöcke)
 # ausdrücken, ob die Varianzen homogen sind.
 
-# CODE_HIER
+print(var.test(rt$logRT~ rt$subj))
+#F=19,8; p=0,0001 --> immer noch homogene Varianzen
+
+if (var.test$p.value > 0.05){
+  print("F test insignikant, die Varianzen sind heterogen.")
+}else{
+  print("Shapiro's test signikant, die Daten sind nicht normal verteilt.")
+}
+
+print(lev.test <- leveneTest(rt$logRT~ rt$subj))
+lev.test$`Pr(>F)` < 0.05
+lev.test$`Pr(>F)`[1]< 0.05
+#P ist größer als 0.05 --> Null-/Wunschhypothese bestätigt --> Varianzen sind homogen
+##
 
 # Sind die Daten "normaler" gewordern? Berechnen Sie den Shapiro-Test für beide 
 # Gruppen. Nach jeder Gruppe sollten Sie auch programmatisch (=durch if-Blöcke)
