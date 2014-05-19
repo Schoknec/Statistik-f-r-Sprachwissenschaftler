@@ -165,10 +165,26 @@ lev.test$`Pr(>F)`[1]< 0.05
 # ausdrücken, ob die Daten normal verteilt sind. 
 # (Für die fortgeschrittenen: hier könnte man auch eine for-Schleife nutzen...)
 
-# CODE_HIER
+shapirolog1 <- shapiro.test(rt[rt$subj==1,"logRT"])
+print(shapirolog1)
+if (shapirolog1$p.value > 0.05){
+  print("Shapiro's test insignikant, die Daten sind normal verteilt.")
+}else{
+  print("Shapiro's test signikant, die Daten sind nicht normal verteilt.")
+}
+
+shapirolog2 <- shapiro.test(rt[rt$subj==2,"logRT"])
+print(shapirolog2)
+if (shapirolog2$p.value > 0.05){
+  print("Shapiro's test insignikant, die Daten sind normal verteilt.")
+}else{
+  print("Shapiro's test signikant, die Daten sind nicht normal verteilt.")
+}
 
 # Hat die logarithmische Transformation insgesamt geholfen? Berechnen Sie zum
 # Schluss den (Welch) t-Test für die logarithmischen Daten. Bekommen Sie das
 # gleiche Ergebnisse wie bei den Ausgangsdaten?
 
-# CODE_HIER
+welchlog <- t.test(rt$logRT~ rt$subj)
+print(welchlog)
+#Werte sind ähnlich, beide p-werte kleiner als 0.05
