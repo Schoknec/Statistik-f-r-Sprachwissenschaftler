@@ -145,10 +145,12 @@ print(logrt.plot)
 # Daten. Nach jedem Test sollten Sie auch programmatisch (=durch if-Blöcke)
 # ausdrücken, ob die Varianzen homogen sind.
 
-print(var.test(rt$logRT~ rt$subj))
+
+var.log <- var.test(rt$logRT~ rt$subj)
+print(var.log)
 #F=19,8; p=0,0001 --> immer noch homogene Varianzen
 
-if (var.test$p.value > 0.05){
+if (var.log$p.value > 0.05){
   print("F test insignikant, die Varianzen sind heterogen.")
 }else{
   print("Shapiro's test signikant, die Daten sind nicht normal verteilt.")
