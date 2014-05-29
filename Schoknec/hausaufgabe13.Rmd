@@ -104,7 +104,7 @@ Sind alle Plots gleich gut?
 Bei "Item" berechnen wir die Mittelwerte aller Trials innerhalb eines Items, d.h. wir nehmen den itemweise Mittelwert über Versuchpersonen hinweg. Dafür können wir `aggregate()` nutzen.
 
 ```{r}
-# priming.by.item <- CODE_HIER
+priming.by.item <- priming.by.subject <- aggregate(RT ~ cond * item,data=priming,FUN = mean)
 ```
 
 Wir wollen auch hier die Daten tabellerisch darstellen. Erstellen Sie eine Tabelle in Wide-Format für die Mittelwerte by Item.
