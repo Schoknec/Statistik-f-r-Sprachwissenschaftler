@@ -58,6 +58,30 @@ ggplot(diamonds,aes(x=carat,y=price,color=color)) + geom_point(alpha=0.3)
 ggplot(diamonds,aes(x=carat,y=price,color=color)) + geom_point() + facet_wrap(~color)
 ```
 
+#Erstmal schauen wie die Daten überhaupt aussehen
+```{r}
+diamonds[1:10,]
+```
+#Frage: Welche Auswirkung hat die Farbe?
+#Erstmal ein Plot
+```{r}
+ggplot(diamonds,aes(x=color,y=carat)) + geom_point()
+e <- subset(diamonds, color=="E")
+i <- subset(diamonds, color=="I")
+j <- subset(diamonds, color=="J")
+h <- subset(diamonds, color=="H")
+d <- subset(diamonds, color=="D")
+f <- subset(diamonds, color=="F")
+
+ggplot(e,aes(x=carat,y=price)) + geom_point()
+ggplot(i,aes(x=carat,y=price)) + geom_point()
+ggplot(j,aes(x=carat,y=price)) + geom_point()
+ggplot(h,aes(x=carat,y=price)) + geom_point()
+ggplot(d,aes(x=carat,y=price)) + geom_point()
+ggplot(f,aes(x=carat,y=price)) + geom_point()
+````
+
+
 # Noch eine Überlegung
 Haben Sie dabei explorativ oder konfirmativ gearbeitet? Was hat das für eine Auswirkung auf die Interpretation der Ergebnisse?
 
