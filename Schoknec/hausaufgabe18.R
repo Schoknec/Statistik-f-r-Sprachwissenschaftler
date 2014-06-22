@@ -45,17 +45,17 @@ y = x1 + x2
 linreg <- data.frame(x1,x2,y)
 
 # Wir können y ~ x1 und y ~ x2 einzel plotten:
-# ggplot(linreg,aes(x=x1,y=y)) + geom_point() + geom_smooth(method="lm")
-# ggplot(linreg,aes(x=x2,y=y)) + geom_point() + geom_smooth(method="lm")
+ggplot(linreg,aes(x=x1,y=y)) + geom_point() + geom_smooth(method="lm")
+ggplot(linreg,aes(x=x2,y=y)) + geom_point() + geom_smooth(method="lm")
 
 # Die Linie passt sehr gut zu den Punkten, was wir hätten erwarten sollen, denn
 # wir haben y aus einfachen Summen von x1 und x2 berechnet. Wir berechnen
 # zunächst die lineare Regression für die einzelnen unabhängige Variablen.
 
-# CODE_HIER (x1)
+lm(x1 ~ y)
 
 
-# CODE_HIER (x2)
+lm(x2 ~ y)
 
 # Was haben Sie für Koeffizeinten bekommen? Wenn wir daran denken, dass x2 = 2*x1 ist, wissen wir, dass 
 # y = x1 + x2
@@ -84,13 +84,15 @@ print(model.summary)
 # passiert, wenn wir die Reihenfolge von x1 und x2 in lm() umstellen? Führen Sie
 # die passende Regression aus:
 
-# CODE_HIER
+model <- lm(y ~ x2 + x1, data=linreg)
+model.summary <- summary(model)
+print(model.summary)
 
 # Bei linearen Regression müssen wir immer aufpassen, dass unsere Prediktoren
 # nicht zu stark miteinander korrelieren. Das könnten wir auch mit cor()
 # austesten. Hier sollten Sie schon Pearsons Korrelationkoeffizienten nennen
 # können, ohne folgenden Befehl auszuführen.
-# cor(linreg$x1,linreg$x2)
+cor(linreg$x1,linreg$x2)
 
 # Wir laden jetzt einen weiteren Datensatz als Beispiel: 
 # (Sie müssen den folgenden Befehl evtl. anpassen!)
@@ -99,17 +101,23 @@ pyreg <- read.table("Data/pyreg.tab",header=TRUE)
 # Wie linreg hat pyreg drei Spalten x1, x2, y
 # Plotten Sie die Punkte + Regressionslinie für y ~ x1 (wie oben).
 
-# CODE_HIER
+ggplot(pyreg,aes(x=x1,y=y)) + geom_point() + geom_smooth(method="lm")
+
 
 # Und das gleiche für y ~ x2. 
 
-# CODE_HIER
+ggplot(pyreg,aes(x=x2,y=y)) + geom_point() + geom_smooth(method="lm")
+
 
 # Berechnen Sie die zwei Regressionsmodelle für y ~ x1 und y ~ x2
 
-# CODE_HIER
+model <- lm(y ~ x1, data=pyreg)
+model.summary <- summary(model)
+print(model.summary)
 
-# CODE_HIER
+model <- lm(y ~ x2, data=pyreg)
+model.summary <- summary(model)
+print(model.summary)
 
 # Bevor Sie die Regression y ~ x1 + x2 berechnen, schauen Sie sich die
 # Korrelation (mit Konfidenzintervall!) zwischen x1 und x2 an:
