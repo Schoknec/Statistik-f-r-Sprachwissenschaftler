@@ -120,8 +120,8 @@ Haben sich die Koeffizienten oder Standardfehler geändert?
 Jetzt berechen wir das Modell mit der Interaktion zwischen `gender` und `attitude`. 
 
 ```{r}
-#model.attitude.int <- CODE_HIER
-#summary(model.attitude.int)
+model.attitude.int <- lmer(frequency ~ gender * attitude + (1|subject) + (1|scenario), data=stimmen, REML=FALSE)
+summary(model.attitude.int)
 ```
 
 Haben sich die Koeffizienten oder Standardfehler geändert?
@@ -129,7 +129,7 @@ Haben sich die Koeffizienten oder Standardfehler geändert?
 Ist die Interaktion signifikant? Wir können uns den Koeffizienten anschauen, aber uns interessiert ob *das Model besser geworden ist*. Das testen wir mit `anova()`
 
 ```{r}
-#anova(model.attitude,model.attitude.int)
+anova(model.attitude,model.attitude.int)
 ```
 
 Hat die Interkation das Modell verbessert? Wenn ein komplexeres Modell nicht signifikant besser als ein einfacheres Modell ist, bleiben wir bei dem einfacheren Modell! 
@@ -147,9 +147,10 @@ Haben sich die Koeffizienten oder Standardfehler (im Vergleich zu `model.attitud
 
 Hat dieses Modell ein signifikante besseres Fit als `model.attitude`? 
 
-CODE_BLOCK_HIER
+anova(model.attitude, model.attitude.re.slope)
 
 Könnten wir hier ein Intercepts-Only-Modell begründen? 
+Ja
 
 Wir könnten -- sollten -- uns hier auch das Modell mit `gender` in der RE-Struktur anschauen, aber solche Berechnungen werden sehr schnell für eine Hausaufgabe zu aufwendig. Sie können sich an dieser Stelle schon vorstellen, wie kompliziert die RE-Struktur werden kann. Wir müssten für jeden zufälligen Effekt die maximale berechenbare Struktur finden und die einzelnen Berechnungen können schon ziemlich lange dauern. Das ist ein deutlicher Nachteil dieser Methode.   
 
@@ -185,7 +186,7 @@ Wir schauen uns zuerst ein Intercept-Only-Modell an:
 coef(model.attitude)
 ```
 
-Wir sehen, dass das Intercept für jedes `subject` und `scenario` ist, aber die Koeffizienten für die Anstige (`genderM` und `attitudepol`) überall gleich sind und zwar die gleichen, die es als fixe Effekte gibt!  Bei dem Modell mit Anstieg in der RE-Struktur gibt es einen Anstieg für jedes `subject` und `scenario`.
+Wir sehen, dass das Intercept für jedes `subject` und `scenario` anders ist, aber die Koeffizienten für die Anstiege (`genderM` und `attitudepol`) überall gleich sind und zwar die gleichen, die es als fixe Effekte gibt!  Bei dem Modell mit Anstieg in der RE-Struktur gibt es einen Anstieg für jedes `subject` und `scenario`.
 
 ```{r}
 coef(model.attitude.re.slope)
