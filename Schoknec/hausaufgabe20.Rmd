@@ -47,7 +47,10 @@ Die Items in dieser Studie sind "Szenarien", also Situationen wo man mehr oder w
 
 Allerdings merken wir, dass `scenario` falsch kodiert ist, was wir korrigieren müssen:
 
-CODE_BLOCK_HIER
+```{r}
+is.factor(stimmen$scenario)
+stimmen$scenario <- as.factor(stimmen$scenario)
+```
 
 ## Auswirkung der experimentellen Manipulation
 Um einen groben Eindruck zu bekommen, können wir schnell einen Boxplot machen:
@@ -74,11 +77,17 @@ Wir können auf ähnliche Art und Weise ein Plot für die Versuchspersonen und S
 
 Erstellen Sie einen Boxplot für `frequency` nach `subject`, wie oben für `frequency` nach `attitude` gemacht wurde (hier ohne Aufteilung nach Geschlecht). Dieser gibt uns einen Blick in die Varianz innerhalb und zwischen Versuchspersonen. 
 
-CODE_BLOCK_HIER
+```{r, fig.width=7, fig.height=4, fig.align='center'}
+ggplot(stimmen) +
+  geom_boxplot(aes(x=subject,y=frequency))
+```
 
 Machen Sie das gleiche für `scenario`. 
 
-CODE_BLOCK_HIER
+```{r, fig.width=7, fig.height=4, fig.align='center'}
+ggplot(stimmen) +
+  geom_boxplot(aes(x=scenario,y=frequency))
+```
 
 Gibt es mehr Varianz zwischen Szenarien oder zwischen Versuchspersonen? 
 
